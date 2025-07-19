@@ -2,6 +2,10 @@ task = input("Enter your task: ")
 priority = input("Priority (high/medium/low): ").lower()
 time_bound = input("Is it time-bound? (yes/no): ").lower()
 
+# Initialize the message
+message = ""
+
+# Match case to process priority
 match priority:
     case "high":
         message = f"Reminder: '{task}' is a high priority task"
@@ -10,12 +14,13 @@ match priority:
     case "low":
         message = f"Note: '{task}' is a low priority task"
     case _:
-        message = f"Task: '{task}' has an undefined priority"
+        message = f"'{task}' has an unknown priority level"
 
-if time_bound == "yes":
+# Conditional logic for time-bound
+if time_bound == "yes" and priority in ["high", "medium", "low"]:
     message += " that requires immediate attention today!"
-else:
-    if priority in ["high", "medium", "low"]:
-        message += ". Consider completing it when you have time."
+elif time_bound == "no" and priority in ["high", "medium", "low"]:
+    message += ". Consider completing it when you have free time."
 
-print(message)
+# Display the result
+print("\n" + message)
